@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
         initMagneticButtons();
         initTiltEffects();
         initCursorTrail();
+        initEnhancedInteractions();
+        initParticleEffects();
+        initAdvancedAnimations();
     } catch (error) {
         console.error('Error initializing scripts:', error);
     }
@@ -673,26 +676,236 @@ function initCursorTrail() {
     }
 }
 
-// Console welcome message
+// Enhanced Console welcome message
 console.log(`
-🚀 Pixeliz Dijital Web Sitesi - REVOLUTIONARY EDITION
+🚀 Pixeliz Dijital Web Sitesi - ULTRA MODERN EDITION
 ====================================================
 İşletmenizi Büyüten Kodlar, Etkileyen Tasarımlar
 
-✨ Revolutionary Features:
-- Glassmorphism & Neumorphism Design
+✨ Ultra Modern Features:
+- Advanced Glassmorphism Design
 - Interactive Geometric Backgrounds
-- Cursor Trail Effects
+- Enhanced Cursor Trail Effects
 - Floating Orb Animations
-- 3D Neumorphic Cards
-- Gradient Text Animations
+- 3D Neumorphic Cards with Hover Effects
+- Dynamic Gradient Text Animations
 - Asymmetric Layout Design
-- Advanced Visual Effects
+- Advanced Visual Effects & Micro-interactions
+- Modern Color Palette
+- Enhanced Typography
+- Sophisticated Animations
+- Improved Dark Mode
+
+🎨 Theme Updates:
+- Modern color scheme with vibrant accents
+- Enhanced glassmorphism effects
+- Better typography hierarchy
+- Improved animations and transitions
+- Advanced hover effects
+- Better responsive design
 
 Web sitesi başarıyla yüklendi!
 Geliştirici: Pixeliz Dijital
-Versiyon: 3.0.0 - REVOLUTIONARY EDITION
+Versiyon: 4.0.0 - ULTRA MODERN EDITION
 `);
+
+// Enhanced Interactions
+function initEnhancedInteractions() {
+    // Add ripple effect to buttons
+    const buttons = document.querySelectorAll('.btn, .service-card, .portfolio-item');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            createRippleEffect(e, this);
+        });
+    });
+
+    // Enhanced hover effects for cards
+    const cards = document.querySelectorAll('.service-card, .portfolio-item, .testimonial-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-12px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+}
+
+// Ripple Effect Function
+function createRippleEffect(event, element) {
+    const ripple = document.createElement('span');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    ripple.classList.add('ripple');
+    
+    // Add ripple styles
+    ripple.style.cssText = `
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+    `;
+    
+    element.style.position = 'relative';
+    element.style.overflow = 'hidden';
+    element.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// Particle Effects
+function initParticleEffects() {
+    // Create floating particles in hero section
+    const heroSection = document.querySelector('.hero');
+    if (!heroSection) return;
+    
+    const particleContainer = document.createElement('div');
+    particleContainer.className = 'particle-container';
+    particleContainer.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    `;
+    
+    heroSection.appendChild(particleContainer);
+    
+    // Create particles
+    for (let i = 0; i < 20; i++) {
+        createParticle(particleContainer);
+    }
+}
+
+function createParticle(container) {
+    const particle = document.createElement('div');
+    const size = Math.random() * 4 + 2;
+    const startX = Math.random() * window.innerWidth;
+    const startY = Math.random() * window.innerHeight;
+    const duration = Math.random() * 20 + 10;
+    const delay = Math.random() * 5;
+    
+    particle.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        background: radial-gradient(circle, rgba(102, 126, 234, 0.6), transparent);
+        border-radius: 50%;
+        left: ${startX}px;
+        top: ${startY}px;
+        animation: float-particle ${duration}s linear infinite;
+        animation-delay: ${delay}s;
+    `;
+    
+    container.appendChild(particle);
+}
+
+// Advanced Animations
+function initAdvancedAnimations() {
+    // Staggered animation for service cards
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add('animate-on-scroll');
+    });
+    
+    // Staggered animation for portfolio items
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    portfolioItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.15}s`;
+        item.classList.add('animate-on-scroll');
+    });
+    
+    // Enhanced scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Add CSS for new animations
+function addAdvancedAnimationCSS() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .portfolio-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .testimonial-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Initialize advanced animation CSS
+addAdvancedAnimationCSS();
 
 // Error handling for external resources
 window.addEventListener('error', function(e) {
