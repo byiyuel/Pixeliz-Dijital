@@ -8,7 +8,6 @@ if (typeof IntersectionObserver !== 'undefined') {
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functions with error handling
     try {
-        initTheme();
         initNavigation();
         initScrollEffects();
         initContactForm();
@@ -25,57 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error initializing scripts:', error);
     }
 });
-
-// Theme functionality
-function initTheme() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
-    
-    // Get saved theme or default to light
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    
-    // Apply saved theme
-    applyTheme(savedTheme);
-    
-    // Theme toggle event listener
-    themeToggle.addEventListener('click', function() {
-        const currentTheme = body.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        applyTheme(newTheme);
-        saveTheme(newTheme);
-    });
-}
-
-function applyTheme(theme) {
-    const body = document.body;
-    const themeToggle = document.getElementById('theme-toggle');
-    
-    // Remove existing theme
-    body.removeAttribute('data-theme');
-    
-    // Apply new theme
-    if (theme === 'dark') {
-        body.setAttribute('data-theme', 'dark');
-        themeToggle.classList.add('active');
-    } else {
-        body.removeAttribute('data-theme');
-        themeToggle.classList.remove('active');
-    }
-    
-    // Update meta theme-color for mobile browsers
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', theme === 'dark' ? '#1a1a1a' : '#ffffff');
-    }
-    
-    // Force reflow to ensure smooth transition
-    body.offsetHeight;
-}
-
-function saveTheme(theme) {
-    localStorage.setItem('theme', theme);
-}
 
 // Navigation functionality
 function initNavigation() {
@@ -678,35 +626,37 @@ function initCursorTrail() {
 
 // Enhanced Console welcome message
 console.log(`
-🚀 Pixeliz Dijital Web Sitesi - ULTRA MODERN EDITION
-====================================================
+🌞 Pixeliz Dijital Web Sitesi - CLEAN LIGHT THEME EDITION
+==========================================================
 İşletmenizi Büyüten Kodlar, Etkileyen Tasarımlar
 
-✨ Ultra Modern Features:
-- Advanced Glassmorphism Design
+✨ Clean Light Theme Features:
+- Modern Light Theme Design
+- Advanced Glassmorphism Effects
 - Interactive Geometric Backgrounds
 - Enhanced Cursor Trail Effects
 - Floating Orb Animations
 - 3D Neumorphic Cards with Hover Effects
 - Dynamic Gradient Text Animations
-- Asymmetric Layout Design
+- Perfect Grid Layout System
 - Advanced Visual Effects & Micro-interactions
-- Modern Color Palette
+- Unified Color Palette
 - Enhanced Typography
 - Sophisticated Animations
-- Improved Dark Mode
+- Clean Single Theme Experience
 
 🎨 Theme Updates:
-- Modern color scheme with vibrant accents
+- Single light theme for consistency
+- Clean and modern color scheme
 - Enhanced glassmorphism effects
 - Better typography hierarchy
 - Improved animations and transitions
 - Advanced hover effects
-- Better responsive design
+- Perfect responsive design
 
 Web sitesi başarıyla yüklendi!
 Geliştirici: Pixeliz Dijital
-Versiyon: 4.0.0 - ULTRA MODERN EDITION
+Versiyon: 5.0.0 - CLEAN LIGHT THEME EDITION
 `);
 
 // Enhanced Interactions
